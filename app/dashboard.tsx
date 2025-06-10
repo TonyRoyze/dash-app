@@ -20,7 +20,7 @@ import {
 import { CustomBarChart } from "../components/charts/bar-chart";
 import { CustomLineChart } from "../components/charts/line-chart";
 import { DateRangePicker } from "../components/date-range-picker";
-import { DataRangeIndicator } from "../components/data-range-indicator";
+// import { DataRangeIndicator } from "../components/data-range-indicator";
 import {
   parseCSV,
   aggregateByRegion,
@@ -53,12 +53,6 @@ export default function AdidasSalesDashboard() {
   const [error, setError] = useState<string | null>(null);
   const [selectedRegions, setSelectedRegions] = useState<string[]>([]);
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
-  const [startDate, setStartDate] = useState<Date | undefined>(
-    new Date("2020-01-02 00:00:00"),
-  );
-  const [endDate, setEndDate] = useState<Date | undefined>(
-    new Date("2021-02-23 00:00:00"),
-  );
   const [dateRange, setDateRange] = useState<{
     from: Date | undefined;
     to: Date | undefined;
@@ -335,7 +329,7 @@ export default function AdidasSalesDashboard() {
                     <div className="flex justify-between items-center mb-5">
                       <h4 className="font-medium">Regions</h4>
                       <Button
-                        variant="destructive"
+                        variant="outline"
                         size="sm"
                         onClick={clearRegionFilters}
                       >
@@ -392,7 +386,7 @@ export default function AdidasSalesDashboard() {
                     <div className="flex justify-between items-center mb-5">
                       <h4 className="font-medium">Products</h4>
                       <Button
-                        variant="destructive"
+                        variant="outline"
                         size="sm"
                         onClick={clearProductFilters}
                       >
@@ -428,7 +422,9 @@ export default function AdidasSalesDashboard() {
 
             {dataDateRange && (
               <div>
-                <p className="text-sm text-gray-500 mb-1">Date Range</p>
+                <label className="block text-sm font-medium text-card-foreground mb-2">
+                  Date Range
+                </label>
                 <DateRangePicker
                   dateRange={dateRange}
                   onDateRangeChangeAction={setDateRange}
