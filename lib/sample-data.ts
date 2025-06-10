@@ -1,6 +1,5 @@
 import type { SalesRecord } from "./data-utils";
 
-// Sample data to use as fallback if CSV loading fails
 export const sampleData: SalesRecord[] = [
   {
     Retailer: "Foot Locker",
