@@ -1,14 +1,12 @@
-import { NextResponse } from "next/server"
-import fs from "fs"
-import path from "path"
+import { NextResponse } from "next/server";
+import fs from "fs";
+import path from "path";
 
 export async function GET() {
   try {
-    // Try to read the CSV file from the public directory
-    const filePath = path.join(process.cwd(), "public", "adidas-sales.csv")
+    const filePath = path.join(process.cwd(), "public", "adidas-sales.csv");
 
-    // Check if file exists
-    const fileExists = fs.existsSync(filePath)
+    const fileExists = fs.existsSync(filePath);
 
     if (!fileExists) {
       return NextResponse.json(
@@ -17,15 +15,13 @@ export async function GET() {
           checkedPath: filePath,
         },
         { status: 404 },
-      )
+      );
     }
 
-    // Get file stats
-    const stats = fs.statSync(filePath)
+    const stats = fs.statSync(filePath);
 
-    // Read first 500 characters of the file
-    const fileContent = fs.readFileSync(filePath, "utf8")
-    const preview = fileContent.substring(0, 500)
+    const fileContent = fs.readFileSync(filePath, "utf8");
+    const preview = fileContent.substring(0, 500);
 
     return NextResponse.json({
       success: true,
@@ -34,7 +30,7 @@ export async function GET() {
       fileSize: stats.size,
       preview,
       headers: fileContent.split("\n")[0],
-    })
+    });
   } catch (error) {
     return NextResponse.json(
       {
@@ -42,6 +38,6 @@ export async function GET() {
         message: error instanceof Error ? error.message : String(error),
       },
       { status: 500 },
-    )
+    );
   }
 }

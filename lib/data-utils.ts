@@ -16,7 +16,6 @@ export interface SalesRecord {
 
 export function parseCSV(csvText: string): SalesRecord[] {
   try {
-    // Log the first few lines to help with debugging
     console.log(
       "CSV first few lines:",
       csvText.split("\n").slice(0, 3).join("\n"),
@@ -31,7 +30,6 @@ export function parseCSV(csvText: string): SalesRecord[] {
     const headers = lines[0].split(",").map((h) => h.trim().replace(/"/g, ""));
     console.log("CSV headers:", headers);
 
-    // Check if we have the expected headers
     const requiredHeaders = [
       "Retailer",
       "Retailer ID",
@@ -58,7 +56,6 @@ export function parseCSV(csvText: string): SalesRecord[] {
       .filter((line) => line.trim())
       .map((line, index) => {
         try {
-          // Handle quoted values properly
           const values: string[] = [];
           let inQuotes = false;
           let currentValue = "";
@@ -76,10 +73,8 @@ export function parseCSV(csvText: string): SalesRecord[] {
             }
           }
 
-          // Add the last value
           values.push(currentValue.trim());
 
-          // If simple splitting didn't work, fall back to it
           if (values.length !== headers.length) {
             console.warn(
               `Line ${index + 2} has ${values.length} values but expected ${headers.length}, falling back to simple split`,
@@ -99,7 +94,6 @@ export function parseCSV(csvText: string): SalesRecord[] {
           headers.forEach((header, index) => {
             const value = values[index] || "";
 
-            // Parse numeric fields
             if (
               [
                 "Retailer ID",
@@ -275,14 +269,12 @@ export function isDateInRange(
     if (isNaN(date.getTime())) return false;
 
     if (startDate) {
-      // Set start date to beginning of day
       const start = new Date(startDate);
       start.setHours(0, 0, 0, 0);
       if (date < start) return false;
     }
 
     if (endDate) {
-      // Set end date to end of day
       const end = new Date(endDate);
       end.setHours(23, 59, 59, 999);
       if (date > end) return false;

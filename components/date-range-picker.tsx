@@ -131,7 +131,7 @@ export function DateRangePicker({
               <Button variant="outline" onClick={clearDates}>
                 Clear
               </Button>
-              <Button onClick={() => setIsOpen(false)}>Apply</Button>
+              {/* <Button onClick={() => setIsOpen(false)}>Apply</Button> */}
             </div>
           </div>
         </PopoverContent>

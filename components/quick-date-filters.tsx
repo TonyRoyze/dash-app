@@ -14,7 +14,6 @@ export function QuickDateFilters({
   onDateRangeChangeAction,
   dataDateRange,
 }: QuickDateFiltersProps) {
-  // Define the actual data range based on your specification
   const dataStartDate = new Date("2020-01-01");
   const dataEndDate = new Date("2021-02-22");
 
